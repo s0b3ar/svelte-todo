@@ -1,0 +1,14 @@
+{
+  "version": 3,
+  "file": "bundle.css",
+  "sources": [
+    "../src/element.svelte",
+    "../src/app.svelte"
+  ],
+  "sourcesContent": [
+    "<style>\n  .element__container {\n    width: 300px;\n    height: 45px;\n    display: flex;\n  }\n  .element__title {\n    font-size: 16px;\n    display: flex;\n    align-items: center;\n  }\n</style>\n\n<div class=\"element__container\">\n  <div class=\"element__title\">\n    <slot name=\"checked\"></slot>\n\t\t<slot name=\"title\"></slot>\n\t</div>\n</div>",
+    "<script>\n  import Element from './element.svelte'\n\n  const items = [\n    { id: 1, title: 'first', checked: false },\n    { id: 2, title: 'second', checked: false }\n  ]\n\n  function addItem(title) {\n    items.push({id: parseInt(items[items.length - 1].id, 10) + 1, title, checked: false })\n  }\n\n  function checkedItem(id) {\n    const item = items.find(item => item.id === id)\n    if (!item) {\n      return\n    }\n  }\n</script>\n\n<style>\n\t.container__todo {\n    width: 600px;\n    margin: auto 50px;\n  }\n</style>\n\n<div class=\"container__todo\">\n  {#each items as item (item.id) }\n  <Element>\n    <input slot=\"checked\" type=\"checkbox\" checked={item.checked} on:click={() => checkedItem(item.id)}>\n    <span slot=\"title\">{item.title}</span>\n  </Element>\n  {/each}\n</div>"
+  ],
+  "names": [],
+  "mappings": "AACE,mBAAmB,eAAC,CAAC,AACnB,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,AACf,CAAC,AACD,eAAe,eAAC,CAAC,AACf,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,AACrB,CAAC;ACWF,gBAAgB,eAAC,CAAC,AACf,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CAAC,IAAI,AACnB,CAAC"
+}
