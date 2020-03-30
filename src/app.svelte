@@ -1,13 +1,20 @@
 <script>
+  // import nanoid from 'nanoid'
   import Element from './element.svelte'
 
-  const items = [
+  const NANOID_LENGTH = 10
+
+
+  let items = [
     { id: 1, title: 'first', checked: false },
     { id: 2, title: 'second', checked: false }
   ]
 
-  function addItem(title) {
-    items.push({id: parseInt(items[items.length - 1].id, 10) + 1, title, checked: false })
+  function addItem() {
+    let todoInput = document.getElementById('todo-add-input')
+    console.log('todoInput', todoInput.value)
+    console.log('items', items)
+    items = items.concat({id: 3, title: todoInput.value, checked: false })
   }
 
   function checkedItem(id) {
@@ -26,7 +33,7 @@
 </style>
 
 <div class="container__todo">
-  {#each items as item (item.id) }
+  {#each items as item}
   <Element>
     <input
       slot="checked"
@@ -37,4 +44,6 @@
     <span slot="title">{item.title}</span>
   </Element>
   {/each}
+  <input type="text" id="todo-add-input">
+  <button on:click={addItem}>add</button>
 </div>

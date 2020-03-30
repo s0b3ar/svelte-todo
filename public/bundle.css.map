@@ -2,13 +2,13 @@
   "version": 3,
   "file": "bundle.css",
   "sources": [
-    "../src/element.svelte",
-    "../src/app.svelte"
+    "..\\src\\app.svelte",
+    "..\\src\\element.svelte"
   ],
   "sourcesContent": [
-    "<style>\n  .element__container {\n    width: 300px;\n    height: 45px;\n    display: flex;\n  }\n  .element__title {\n    font-size: 16px;\n    display: flex;\n    align-items: center;\n  }\n</style>\n\n<div class=\"element__container\">\n  <div class=\"element__title\">\n    <slot name=\"checked\"></slot>\n\t\t<slot name=\"title\"></slot>\n\t</div>\n</div>",
-    "<script>\n  import Element from './element.svelte'\n\n  const items = [\n    { id: 1, title: 'first', checked: false },\n    { id: 2, title: 'second', checked: false }\n  ]\n\n  function addItem(title) {\n    items.push({id: parseInt(items[items.length - 1].id, 10) + 1, title, checked: false })\n  }\n\n  function checkedItem(id) {\n    const item = items.find(item => item.id === id)\n    if (!item) {\n      return\n    }\n  }\n</script>\n\n<style>\n\t.container__todo {\n    width: 600px;\n    margin: auto 50px;\n  }\n</style>\n\n<div class=\"container__todo\">\n  {#each items as item (item.id) }\n  <Element>\n    <input slot=\"checked\" type=\"checkbox\" checked={item.checked} on:click={() => checkedItem(item.id)}>\n    <span slot=\"title\">{item.title}</span>\n  </Element>\n  {/each}\n</div>"
+    "<script>\r\n  // import nanoid from 'nanoid'\r\n  import Element from './element.svelte'\r\n\r\n  const NANOID_LENGTH = 10\r\n\r\n\r\n  let items = [\r\n    { id: 1, title: 'first', checked: false },\r\n    { id: 2, title: 'second', checked: false }\r\n  ]\r\n\r\n  function addItem() {\r\n    let todoInput = document.getElementById('todo-add-input')\r\n    console.log('todoInput', todoInput.value)\r\n    console.log('items', items)\r\n    items = items.concat({id: 3, title: todoInput.value, checked: false })\r\n  }\r\n\r\n  function checkedItem(id) {\r\n    const item = items.find(item => item.id === id)\r\n    if (!item) {\r\n      return\r\n    }\r\n  }\r\n</script>\r\n\r\n<style>\r\n\t.container__todo {\r\n    width: 600px;\r\n    margin: auto 50px;\r\n  }\r\n</style>\r\n\r\n<div class=\"container__todo\">\r\n  {#each items as item}\r\n  <Element>\r\n    <input\r\n      slot=\"checked\"\r\n      type=\"checkbox\"\r\n      checked={item.checked}\r\n      on:click={() => checkedItem(item.id)}\r\n    />\r\n    <span slot=\"title\">{item.title}</span>\r\n  </Element>\r\n  {/each}\r\n  <input type=\"text\" id=\"todo-add-input\">\r\n  <button on:click={addItem}>add</button>\r\n</div>",
+    "<style>\r\n  .element__container {\r\n    width: 300px;\r\n    height: 45px;\r\n    display: flex;\r\n  }\r\n  .element__title {\r\n    font-size: 16px;\r\n    display: flex;\r\n    align-items: center;\r\n  }\r\n</style>\r\n\r\n<div class=\"element__container\">\r\n  <div class=\"element__title\">\r\n    <slot name=\"checked\"></slot>\r\n\t\t<slot name=\"title\"></slot>\r\n\t</div>\r\n</div>"
   ],
   "names": [],
-  "mappings": "AACE,mBAAmB,eAAC,CAAC,AACnB,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,AACf,CAAC,AACD,eAAe,eAAC,CAAC,AACf,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,AACrB,CAAC;ACWF,gBAAgB,eAAC,CAAC,AACf,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CAAC,IAAI,AACnB,CAAC"
+  "mappings": "AA4BC,gBAAgB,cAAC,CAAC,AACf,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CAAC,IAAI,AACnB,CAAC;AC9BD,mBAAmB,eAAC,CAAC,AACnB,KAAK,CAAE,KAAK,CACZ,MAAM,CAAE,IAAI,CACZ,OAAO,CAAE,IAAI,AACf,CAAC,AACD,eAAe,eAAC,CAAC,AACf,SAAS,CAAE,IAAI,CACf,OAAO,CAAE,IAAI,CACb,WAAW,CAAE,MAAM,AACrB,CAAC"
 }
