@@ -3,6 +3,7 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
+import replace from '@rollup/plugin-replace'
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -15,6 +16,10 @@ export default {
 		file: 'public/assets/bundle.js'
 	},
 	plugins: [
+		replace({
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE)
+		}),
+		
 		svelte({
 			// enable run-time checks when not in production
 			dev: !production,
@@ -34,6 +39,7 @@ export default {
 			browser: true,
 			dedupe: importee => importee === 'svelte' || importee.startsWith('svelte/')
 		}),
+		
 		commonjs(),
 
 		// Watch the `public` directory and refresh the
