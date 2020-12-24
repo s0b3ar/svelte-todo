@@ -10,6 +10,7 @@
   function addItem() {
     let todoInput = document.getElementById('todo-add-input')
     items = items.concat({id: nanoid(NANOID_LENGTH), title: todoInput.value, checked: false })
+    todoInput.value = ''
   }
 
   function checkedItem(id) {
@@ -30,6 +31,8 @@
 </style>
 
 <div class="container__todo">
+  <input type="text" id="todo-add-input">
+  <button on:click={addItem}>add</button>
   {#if items.length === 0 }
     <p>No items in list</p>
   {:else}
@@ -42,6 +45,4 @@
       />
     {/each}
   {/if}
-  <input type="text" id="todo-add-input">
-  <button on:click={addItem}>add</button>
 </div>
