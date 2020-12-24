@@ -1,14 +1,10 @@
 <script>
-  // import nanoid from 'nanoid'
   import Element from './element.svelte'
 
   const NANOID_LENGTH = 10
 
 
-  let items = [
-    { id: 1, title: 'first', checked: false },
-    { id: 2, title: 'second', checked: false }
-  ]
+  let items = []
 
   function addItem() {
     let todoInput = document.getElementById('todo-add-input')
